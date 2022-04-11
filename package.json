@@ -1,0 +1,31 @@
+{
+  "author": "Aziz Da <azizdawhat@gmail.com>",
+  "description": "Stream-like static site generator, and beyond!",
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "conventional-github-releaser": "^3.1.5",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^16.0.0",
+    "husky": "^7.0.4",
+    "standard-version": "^9.3.2"
+  },
+  "keywords": [
+    "static site generator",
+    "stream-like"
+  ],
+  "license": "MPL-2.0",
+  "name": "genious",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azizdawhat/genious.git"
+  },
+  "scripts": {
+    "github-release": "node -r dotenv/config ./node_modules/.bin/conventional-github-releaser -p \"angular\" -r 0",
+    "postinstall": "husky install"
+  },
+  "type": "module",
+  "workspaces": [
+    "./packages/*"
+  ]
+}

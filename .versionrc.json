@@ -1,0 +1,7 @@
+{
+  "infile": "./CHANGELOG.md",
+  "skip": {
+    "bump": true
+  },
+  "tagPrefix": "V"
+}
