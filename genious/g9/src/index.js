@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as floName } from './floName.js';
+export { default as dataName } from './dataName.js';
