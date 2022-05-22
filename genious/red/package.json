@@ -52,7 +52,7 @@
   "scripts": {
     "build": "rollup --config \"./rollup.config.cjs\"",
     "build-declare": "yarn run build & tsc --project \"./tsconfig.json\" & wait",
-    "prebuild": "del-cli \"./dist/*\" \"./.tmp\"",
+    "prebuild": "del-cli \"./dist/*\"",
     "test": "mocha --config \"./.mocharc.json\""
   },
   "type": "module",
