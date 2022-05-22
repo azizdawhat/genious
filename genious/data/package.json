@@ -29,9 +29,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./from": {
-      "import": "./dist/Flo.from.js",
-      "require": "./dist/Flo.from.cjs"
+    "./fromFile": {
+      "import": "./dist/Data.fromFile.js",
+      "require": "./dist/Data.fromFile.cjs"
     }
   },
   "homepage": "https://github.com/azizdawhat/genious#readme",
@@ -41,19 +41,19 @@
   ],
   "license": "MPL-2.0",
   "main": "./dist/index.cjs",
-  "name": "@genious/flo",
+  "name": "@genious/data",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
-    "directory": "./genious/flo",
+    "directory": "./genious/data",
     "type": "git",
     "url": "https://github.com/azizdawhat/genious.git"
   },
   "scripts": {
     "build": "rollup --config \"./rollup.config.cjs\"",
     "build-declare": "yarn run build & tsc --project \"./tsconfig.json\" & wait",
-    "prebuild": "del-cli \"./dist/*\" \"./.tmp\"",
+    "prebuild": "del-cli \"./dist/*\"",
     "test": "mocha --config \"./.mocharc.json\""
   },
   "type": "module",

@@ -14,7 +14,7 @@ const config = {
     toRegex(node),
   ],
   input: {
-    'Flo.from': './src/Flo.from.js',
+    'Data.fromFile': './src/Data.fromFile.js',
     index: './src/index.js',
   },
   output: [
@@ -38,23 +38,4 @@ const config = {
   ],
 };
 
-const {output: [, output,],} = config;
-
-function configFn({watch: key = false,}, {[key]: value = {},} = this) {
-  return value;
-}
-
-module.exports = configFn.bind({
-  [false]: {
-    ...config,
-    watch: false,
-  },
-  [true]: {
-    ...config,
-    output: {
-      ...output,
-      dir: './.tmp',
-    },
-    watch: {},
-  },
-});
+module.exports = config;

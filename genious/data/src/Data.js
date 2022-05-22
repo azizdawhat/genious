@@ -13,7 +13,7 @@ const { prototype: url } = URL;
 
 /**
  */
-class Flo {
+class Data {
   /**
    * @type {TextDecoder}
    */
@@ -25,30 +25,25 @@ class Flo {
   static #encoder = new TextEncoder();
 
   /**
-   * @param data
+   * @param view
    * @param args
-   * @returns {Flo}
+   * @returns {Data}
    */
-  static from(data = null, ...args) {
-    if (Flo.isFlo(data)) {
-      return new Flo(data.data, data.name, data.metadata);
+  static from(view = null, ...args) {
+    if (Data.isData(view)) {
+      return new Data(view.view, view.name, view.metadata);
     }
 
-    return new Flo(data, ...args);
+    return new Data(view, ...args);
   }
 
   /**
    * @param value
    * @returns {boolean}
    */
-  static isFlo(value) {
-    return (value instanceof Flo);
+  static isData(value) {
+    return (value instanceof Data);
   }
-
-  /**
-   * @type {Uint8Array}
-   */
-  #data = new Uint8Array(0);
 
   /**
    */
@@ -60,42 +55,24 @@ class Flo {
   #metadata = {};
 
   /**
-   * @param data
+   * @type {Uint8Array}
+   */
+  #view = new Uint8Array(0);
+
+  /**
+   * @param view
    * @param name
    * @param metadata
    */
-  constructor(data = null, name = null, metadata = null) {
-    if ((data != null)) {
-      this.data = data;
-    }
-
+  constructor(view = null, name = null, metadata = null) {
     this.metadata = metadata;
 
     if ((name != null)) {
       this.name = name;
     }
-  }
 
-  /**
-   * @returns {string}
-   */
-  get data() {
-    return String(this);
-  }
-
-  /**
-   * @param value
-   */
-  set data(value) {
-    // eslint-disable-next-line max-len
-    if (!any.call([isPrototypeOf.bind(buffer), isPrototypeOf.bind(typedArray), isString], null, value)) {
-      throw new TypeError(`data must be of type ArrayBuffer, TypedArray or String. Received type: ${type(value)}!`);
-    }
-
-    if (isString(value)) {
-      this.#data = Flo.#encoder.encode(value);
-    } else {
-      this.#data = new Uint8Array(value);
+    if ((view != null)) {
+      this.view = view;
     }
   }
 
@@ -136,25 +113,48 @@ class Flo {
   }
 
   /**
+   * @returns {Uint8Array}
+   */
+  get view() {
+    return this.#view;
+  }
+
+  /**
+   * @param value
+   */
+  set view(value) {
+    // eslint-disable-next-line max-len
+    if (!any.call([isPrototypeOf.bind(buffer), isPrototypeOf.bind(typedArray), isString], null, value)) {
+      throw new TypeError(`view must be of type ArrayBuffer, String or TypedArray. Received type: ${type(value)}!`);
+    }
+
+    if (isString(value)) {
+      this.#view = Data.#encoder.encode(value);
+    } else {
+      this.#view = new Uint8Array(value);
+    }
+  }
+
+  /**
    * @returns {IterableIterator<Uint8Array>}
    */
   * [iterator]() {
-    yield* this.#data;
+    yield* this.#view;
   }
 
   /**
    * @returns {string}
    */
   [toPrimitive]() {
-    return Flo.#decoder.decode(this.#data);
+    return Data.#decoder.decode(this.#view);
   }
 
   /**
    * @returns {string}
    */// eslint-disable-next-line class-methods-use-this
   get [toStringTag]() {
-    return 'Flo';
+    return 'Data';
   }
 }
 
-export default Flo;
+export default Data;
