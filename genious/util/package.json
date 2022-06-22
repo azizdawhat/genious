@@ -40,12 +40,12 @@
   ],
   "license": "MPL-2.0",
   "main": "./dist/index.cjs",
-  "name": "@genious/red",
+  "name": "@genious/util",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
-    "directory": "./genious/red",
+    "directory": "./genious/util",
     "type": "git",
     "url": "https://github.com/azizdawhat/genious.git"
   },
