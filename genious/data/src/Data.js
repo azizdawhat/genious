@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { any, isString, type } from '@genious/red';
+import { any, isString, type } from '@genious/util';
 
 const { prototype: buffer } = ArrayBuffer;
 

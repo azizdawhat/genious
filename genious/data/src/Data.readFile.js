@@ -2,7 +2,7 @@
 import * as G9 from '@genious/g9';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { any, isString, type } from '@genious/red';
+import { any, isString, type } from '@genious/util';
 
 import { readFile } from 'node:fs/promises';
 
@@ -17,19 +17,6 @@ const { prototype: url } = URL;
 /**
  */
 class Data_ extends Data {
-  /**
-   * @param path
-   * @param metadata
-   * @returns {Promise<void>}
-   */
-  static async fromFile(path, metadata = null) {
-    if (!any.call([isPrototypeOf.bind(url), isString], null, path)) {
-      throw new TypeError(`path must be of type String or URL. Received type: ${type(path)}!`);
-    }
-
-    return new (assign(Data_, Data))(dataToken, (await readFile((path.valueOf()))), path, metadata);
-  }
-
   /**
    */
   #srcName;
@@ -56,6 +43,19 @@ class Data_ extends Data {
   get [dataName]() {
     return this.#srcName;
   }
+
+  /**
+   * @param path
+   * @param metadata
+   * @returns {Promise<void>}
+   */
+  static async readFile(path, metadata = null) {
+    if (!any.call([isPrototypeOf.bind(url), isString], null, path)) {
+      throw new TypeError(`path must be of type String or URL. Received type: ${type(path)}!`);
+    }
+
+    return new (assign(Data_, Data))(dataToken, (await readFile((path.valueOf()))), path, metadata);
+  }
 }
 
-export default Data_.fromFile;
+export default Data_.readFile;

@@ -14,7 +14,7 @@ const config = {
     toRegex(node),
   ],
   input: {
-    'Data.fromFile': './src/Data.fromFile.js',
+    'Data.readFile': './src/Data.readFile.js',
     index: './src/index.js',
   },
   output: [

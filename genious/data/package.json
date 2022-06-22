@@ -29,9 +29,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./fromFile": {
-      "import": "./dist/Data.fromFile.js",
-      "require": "./dist/Data.fromFile.cjs"
+    "./readFile": {
+      "import": "./dist/Data.readFile.js",
+      "require": "./dist/Data.readFile.cjs"
     }
   },
   "homepage": "https://github.com/azizdawhat/genious#readme",
