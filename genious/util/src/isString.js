@@ -1,7 +1,8 @@
 const { is } = Object;
 
 /**
- * @param value
+ * Returns true if value is of type string otherwise returns false.
+ * @param {*} value
  * @returns {boolean}
  */
 function isString(value) {

@@ -1,7 +1,8 @@
 const { prototype: { toString } } = Object;
 
 /**
- * @param obj
+ * Returns type of value from stringTag
+ * @param {*} obj
  * @returns {string}
  */
 function type(obj) {
