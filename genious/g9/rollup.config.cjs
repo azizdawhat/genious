@@ -1,10 +1,16 @@
 const {babel,} = require('@rollup/plugin-babel');
 
+const commonjs = require('@rollup/plugin-commonjs');
+
 const eslint = require('@rollup/plugin-eslint');
+
+const {nodeResolve,} = require('@rollup/plugin-node-resolve');
 
 const {readdirSync,} = require('node:fs');
 
 const {format,} = require('node:path');
+
+const {terser,} = require('rollup-plugin-terser');
 
 const dir = './src';
 
@@ -30,10 +36,13 @@ const config = {
     },
   ],
   plugins: [
+    nodeResolve({}),
+    commonjs({}),
     eslint({}),
     babel({
       babelHelpers: 'bundled',
     }),
+    terser({}),
   ],
 };
 

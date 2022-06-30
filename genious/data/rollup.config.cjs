@@ -1,8 +1,14 @@
 const {babel,} = require('@rollup/plugin-babel');
 
+const commonjs = require('@rollup/plugin-commonjs');
+
 const eslint = require('@rollup/plugin-eslint');
 
+const {nodeResolve,} = require('@rollup/plugin-node-resolve');
+
 const {parse, toRegex,} = require('picomatch');
+
+const {terser,} = require('rollup-plugin-terser');
 
 const {output: g9,} = parse('@genious/*(/**/*)');
 
@@ -31,10 +37,13 @@ const config = {
     },
   ],
   plugins: [
+    nodeResolve({}),
+    commonjs({}),
     eslint({}),
     babel({
       babelHelpers: 'bundled',
     }),
+    terser({}),
   ],
 };
 
