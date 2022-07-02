@@ -7,7 +7,7 @@ const { MAX_SAFE_INTEGER } = Number;
 class Red {
   /**
    * @param {number} [n=Number.MAX_SAFE_INTEGER]
-   * @this Iterable<*>
+   * @this {IterableIterator<*>}
    * @yields {Promise<any[]>}
    */
   static async* #chunk(n = MAX_SAFE_INTEGER) {
@@ -16,8 +16,8 @@ class Red {
 
   /**
    * @param {number} [depth=1]
-   * @this Iterable<*>
-   * @yields {Promise<any>}
+   * @this {IterableIterator<*>}
+   * @yields {Promise<*>}
    */
   static async* #flat(depth = 1) {
     yield* (await Red.toArray.call(this)).flat(depth);
@@ -26,33 +26,45 @@ class Red {
   /**
    * @param {function} callbackFn
    * @param {number} [n=Number.MAX_SAFE_INTEGER]
-   * @param {?{}} [thisArg]
-   * @this Iterable<*>
-   * @yields {Promise<any>}
+   * @param {?{}} [thisArg=undefined]
+   * @this {IterableIterator<*>}
+   * @yields {Promise<*>}
    */
-  static async* flatMap(callbackFn, n = MAX_SAFE_INTEGER) {
-    // eslint-disable-next-line prefer-rest-params
-    yield* pipe.call([Red.map, call.bind(Red.#flat)], this, callbackFn, n, arguments[2]);
+  static async* filter(callbackFn, n = MAX_SAFE_INTEGER, thisArg = undefined) {
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const A of Red.#chunk.call(this, n)) {
+      yield* A.filter(nAry.bind(callbackFn, 1, thisArg));
+    }
   }
 
   /**
    * @param {function} callbackFn
    * @param {number} [n=Number.MAX_SAFE_INTEGER]
-   * @param {?{}} [thisArg]
-   * @this Iterable<*>
-   * @yields {Promise<any>}
+   * @param {?{}} [thisArg=undefined]
+   * @this {IterableIterator<*>}
+   * @yields {Promise<*>}
    */
-  static async* map(callbackFn, n = MAX_SAFE_INTEGER) {
+  static async* flatMap(callbackFn, n = MAX_SAFE_INTEGER, thisArg = undefined) {
+    yield* pipe.call([Red.map, call.bind(Red.#flat)], this, callbackFn, n, thisArg);
+  }
+
+  /**
+   * @param {function} callbackFn
+   * @param {number} [n=Number.MAX_SAFE_INTEGER]
+   * @param {?{}} [thisArg=undefined]
+   * @this {IterableIterator<*>}
+   * @yields {Promise<*>}
+   */
+  static async* map(callbackFn, n = MAX_SAFE_INTEGER, thisArg = undefined) {
     // eslint-disable-next-line no-restricted-syntax
     for await (const A of Red.#chunk.call(this, n)) {
-      // eslint-disable-next-line prefer-rest-params
-      yield* A.map(nAry.bind(callbackFn, 1, arguments[2]));
+      yield* A.map(nAry.bind(callbackFn, 1, thisArg));
     }
   }
 
   /**
    * @returns {Promise<any[]>}
-   * @this Iterable<*>
+   * @this {IterableIterator<*>}
    */
   static async toArray() {
     // eslint-disable-next-line no-array-constructor

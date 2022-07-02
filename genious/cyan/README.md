@@ -5,10 +5,12 @@
 * [Usage](#usage)
 	* [Cyan()](#cyan)
 	* [Cyan.cyanify()](#cyancyanify)
+	* [Cyan.prototype.filter()](#cyanprototypefilter)
 	* [Cyan.prototype.flatMap()](#cyanprototypeflatmap)
 	* [Cyan.prototype.map()](#cyanprototypemap)
 	* [Cyan.prototype.toArray()](#cyanprototypetoarray)
 	* [Cyan.prototype\[@@asyncIterator\]()](#cyanprototypeasynciterator)
+	* [Cyan\[@@species\]](#cyanspecies)
 
 ## Installation
 
@@ -30,7 +32,7 @@ import Cyan from '@genious/cyan';
 
 Creates a new `Cyan` object.
 
-* **param** `{Iterable<*>}` **[iterable=Array()]**
+* **@param** `{IterableIterator<*>}` **[iterable=Array()]**
 
 ```javascript
 const iterable = new Cyan((Object.entries({})));
@@ -49,13 +51,22 @@ For an async generator function, returns an instance of `Cyan` containing the re
 const func = Cyan.cyanify.bind(events.on);
 ```
 
+#### Cyan.prototype.filter()
+
+Returns a new `Cyan` instance containing the filtered values of the called `Cyan` object.
+
+* **param** `{function}` **callbackFn**
+* **param** `{number}` **[n=Number.MAX\_SAFE\_INTEGER]**
+* **param** `{?{}}` **[thisArg=undefined]**
+* **returns** `{Cyan}`
+
 #### Cyan.prototype.flatMap()
 
 Returns a new instance of `Cyan` formed by mapped and flattened values of called `Cyan` object.
 
 * **param** `{function}` **callbackFn**
 * **param** `{number}` **[n=Number.MAX\_SAFE\_INTEGER]**
-* **param** `{?{}}` **[thisArg]**
+* **param** `{?{}}` **[thisArg=undefined]**
 * **returns** `{Cyan}`
 
 ```javascript
@@ -72,7 +83,7 @@ Returns a new instance of `Cyan` formed by mapped values of called `Cyan` object
 
 * **param** `{function}` **callbackFn**
 * **param** `{number}` **[n=Number.MAX\_SAFE\_INTEGER]**
-* **param** `{?{}}` **[thisArg]**
+* **param** `{?{}}` **[thisArg=undefined]**
 * **returns** `{Cyan}`
 
 #### Cyan.prototype.toArray()
@@ -89,7 +100,13 @@ await iterable.toArray();
 
 Returns `Cyan` iterator with values of async iterable.
 
-* **yields** `{Promise<any>}`
+* **@yields** `{Promise<*>}`
+
+#### Cyan\[@@species\]
+
+Returns `constructor` of `Cyan`.
+
+* **returns** `{Cyan}`
 
 ## Authors
 
