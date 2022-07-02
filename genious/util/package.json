@@ -5,8 +5,7 @@
     "url": "https://github.com/azizdawhat/genious/issues"
   },
   "dependencies": {
-    "core-js": "^3.23.3",
-    "regenerator-runtime": "^0.13.9"
+    "core-js": "^3.23.3"
   },
   "description": "another javascript library of utility functions",
   "devDependencies": {
@@ -64,5 +63,5 @@
   },
   "type": "module",
   "types": "./dist/index.d.ts",
-  "version": "0.0.2"
+  "version": "0.0.3"
 }

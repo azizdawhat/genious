@@ -7,6 +7,7 @@
 	* [chunk()](#chunk)
 	* [get()](#get)
 	* [pipe()](#pipe)
+	* [ifFalse()](#iffalse)
 	* [nAry()](#nary)
 	* [isFunction()](#isfunction)
 	* [isString()](#isstring)
@@ -114,6 +115,19 @@ const isIterable = pipe.bind([
 
 console.log(isIterable({}));
 // false
+```
+
+#### ifFalse()
+
+For a function, if satisfied by value returns value otherwise returns the result of falseFn call with value as argument.
+
+* **param** `{function}` **falseFn**
+* **param** `{*}` `value`
+* **returns** `{*}`
+* **this** `Function`
+
+```javascript
+const castArray = ifFalse.bind(Array.isArray, Array.of);
 ```
 
 #### nAry()
